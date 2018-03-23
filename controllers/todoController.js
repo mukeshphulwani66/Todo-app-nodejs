@@ -18,7 +18,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 module.exports = function(app){
 
 
-    app.get('/todo',function(req,res){
+    app.get('/',function(req,res){
    // get data form mdb and pass or render to view 
         Todo.find({},function(err,data){
          if(err) throw err;
@@ -27,7 +27,7 @@ module.exports = function(app){
      
     });
     
-    app.post('/todo',urlencodedParser,function(req,res){
+    app.post('/',urlencodedParser,function(req,res){
 // get data from view and add it to mdb
 var newTodo = Todo(req.body).save(function(err,data){
    if(err) throw err;
@@ -35,7 +35,7 @@ var newTodo = Todo(req.body).save(function(err,data){
   });
       });
 
-     app.delete('/todo/:item',function(req,res){
+     app.delete('/:item',function(req,res){
          // delete data from mdb
          Todo.find({item: req.params.item.replace(/\-/g," ")}).remove(function(err,data){
              if(err) throw err;
